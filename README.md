@@ -227,7 +227,7 @@
 </div>
 
 <div align="center">
-        <a href="https://www.youtube.com/watch?v=cyoWTjSp_-Y"><img src="https://img.youtube.com/vi/cyoWTjSp_-Y/0.jpg"></a>
+        <a href="https://www.youtube.com/watch?v=cyoWTjSp_-Y" target="_blank"><img src="https://img.youtube.com/vi/cyoWTjSp_-Y/0.jpg"></a>
 </div>
 
 # Image Completion Results
