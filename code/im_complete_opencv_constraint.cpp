@@ -630,8 +630,10 @@ void image_complete(Mat im_orig, Mat mask, Mat constraint) {
         }
       }
 
+#ifdef DEBUG
       string outfile = "r_scale" + to_string(index) + "_imiter" + to_string(im_iter) + ".png";
       imwrite(outfile, R);
+#endif
 
       delete ann;
       delete annd;
