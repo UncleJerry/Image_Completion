@@ -1,9 +1,9 @@
 # To compile
 
-'''
+```
 cmake ./
 make
-'''
+```
 
 # To use the GUI
 
