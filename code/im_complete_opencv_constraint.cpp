@@ -23,6 +23,7 @@
 #include <sstream>
 #include <assert.h>
 #include <opencv2/opencv.hpp>
+#include <opencv2/imgcodecs.hpp>
 
 #include <iostream>
 #include <vector>
@@ -391,7 +392,7 @@ void patchmatch(Mat a, Mat b, BITMAP *&ann, BITMAP *&annd, Mat dilated_mask, Mat
  *
  * @return the completed/inpainting image
  */
-void image_complete(Mat im_orig, Mat mask, Mat constraint) {
+void image_complete(Mat im_orig, Mat mask, Mat constraint, char *name) {
 
   // some parameters for scaling
   int rows = im_orig.rows;
@@ -665,21 +666,21 @@ void image_complete(Mat im_orig, Mat mask, Mat constraint) {
     }
   }
 
-  imwrite("final_out.png", resize_img);
+  imwrite(name, resize_img);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[]){
   argc--;
   argv++;
-  if (argc != 3 && argc != 4) { fprintf(stderr, "im_complete a mask result\n"
+  if (argc != 4 && argc != 5) { fprintf(stderr, "im_complete a mask result\n"
                                    "Given input image a and mask outputs result\n"
                                    "These are stored as RGB 24-bit images, with a 24-bit int at every pixel."); exit(1); }
 
   Mat image = imread(argv[0]);
 
   Mat a_matrix = image.clone();
-  Mat mask_cv = imread(argv[1], CV_LOAD_IMAGE_GRAYSCALE);
-  Mat const_cv = imread(argv[2], CV_LOAD_IMAGE_GRAYSCALE);
+  Mat mask_cv = imread(argv[1], cv::ImreadModes::IMREAD_GRAYSCALE);
+  Mat const_cv = imread(argv[2], cv::ImreadModes::IMREAD_GRAYSCALE);
 
   printf("mask_cv type %d\n", mask_cv.type());
   for (int y = 0; y < mask_cv.rows; ++y) {
@@ -691,7 +692,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  image_complete(image, mask_cv, const_cv);
+  image_complete(image, mask_cv, const_cv, argv[3]);
 
   return 0;
 }
